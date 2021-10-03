@@ -54,7 +54,16 @@ if(response.statusCode==200){
                   return Center(child: CircularProgressIndicator(),);
                 }else{
                   return coinData.data.isEmpty?
-                  Center(child: Text(connected.value?'No coins available to show':'No cached data to show'),):
+                  Column(
+                    children: [
+                      ListTile(
+                        title: !connected.value?
+                        Text('Offline (cached data)',style:TextStyle(color: Colors.red)):
+                        Text('Online',style:TextStyle(color: Colors.green)),
+                      ),
+                      Center(child: Text(connected.value?'No coins available to show':'No cached data to show'),),
+                    ],
+                  ):
                   ListView(
                     children: [
                       ListTile(
